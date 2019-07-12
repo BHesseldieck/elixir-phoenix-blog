@@ -20,8 +20,9 @@ defmodule CmsWeb.Router do
     get "/hello", HelloController, :index
     get "/hello/:messenger", HelloController, :show
 
-    resources "/users", UserController
-    resources "/posts", PostController, only: [:index, :show]
+    resources "/users", UserController do
+      resources "/posts", PostController
+    end
     resources "/comments", CommentController, except: [:delete]
 
     forward "/jobs", BackgroundJob.Plug, name: "Hello Phoenix"
