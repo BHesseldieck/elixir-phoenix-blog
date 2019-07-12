@@ -19,7 +19,14 @@ defmodule CmsWeb.Router do
     get "/", PageController, :index
     get "/hello", HelloController, :index
     get "/hello/:messenger", HelloController, :show
+
+    resources "/users", UserController
+    resources "/posts", PostController, only: [:index, :show]
+    resources "/comments", CommentController, except: [:delete]
+
+    forward "/jobs", BackgroundJob.Plug, name: "Hello Phoenix"
   end
+
 
   # Other scopes may use custom stacks.
   # scope "/api", CmsWeb do
