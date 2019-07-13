@@ -23,14 +23,36 @@ defmodule CmsWeb.Router do
     resources "/users", UserController do
       resources "/posts", PostController
     end
-    resources "/comments", CommentController, except: [:delete]
+    resources "/comments", CommentController
+    resources "/reviews", ReviewController, except: [:delete]
 
     forward "/jobs", BackgroundJob.Plug, name: "Hello Phoenix"
   end
 
+  scope "/admin", CmsWeb.Admin, as: :admin do
+    pipe_through :browser
 
-  # Other scopes may use custom stacks.
-  # scope "/api", CmsWeb do
-  #   pipe_through :api
+    resources "/users",   CmsWeb.Admin.UserController
+    resources "/images",  CmsWeb.Admin.ImageController
+    resources "/reviews", CmsWeb.Admin.ReviewController
+  end
+
+
+  scope "/api", CmsWeb.Api, as: :api do
+    pipe_through :api
+
+    scope "/v1", V1, as: :v1 do
+      resources "/images",  ImageController
+      resources "/reviews", ReviewController
+      resources "/users",   UserController
+      resources "/comments", CommentController
+    end
+  end
+
+  # App within app, separate app for admin and users
+  # scope "/", AnotherAppWeb do
+  #   pipe_through :browser
+
+  #   resources "/posts", PostController
   # end
 end
