@@ -2,7 +2,7 @@ defmodule CmsWeb.UserSocket do
   use Phoenix.Socket
 
   ## Channels
-  # channel "room:*", CmsWeb.RoomChannel
+  channel "room:*", CmsWeb.RoomChannel
 
   # Socket params are passed from the client and can
   # be used to verify and authenticate a user. After
