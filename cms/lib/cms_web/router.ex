@@ -21,6 +21,8 @@ defmodule CmsWeb.Router do
     get "/hello", HelloController, :index
     get "/hello/:messenger", HelloController, :show
 
+    get "/redirect_test", PageController, :redirect_test, as: :redirect_test # as is required otherwise it uses controller for path helper e.g. page_path
+
     resources "/users", UserController do
       resources "/posts", PostController
     end
