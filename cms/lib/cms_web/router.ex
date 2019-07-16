@@ -18,6 +18,7 @@ defmodule CmsWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :index
+    get "/test", PageController, :test
     get "/hello", HelloController, :index
     get "/hello/:messenger", HelloController, :show
 
