@@ -3,6 +3,7 @@ defmodule CmsWeb.UserSocket do
 
   ## Channels
   channel "room:*", CmsWeb.RoomChannel
+  channel "foods:*", CmsWeb.FoodChannel
 
   # Socket params are passed from the client and can
   # be used to verify and authenticate a user. After
