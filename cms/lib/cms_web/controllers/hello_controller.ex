@@ -7,6 +7,7 @@ defmodule CmsWeb.HelloController do
     conn
     |> assign(:message, "Welcome Back ") # assign or as third argument to render are the same
     |> assign(:name, "Dweezil")
+    |> put_layout("admin.html")
     |> render("index.html")
   end
 
