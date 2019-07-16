@@ -5,9 +5,9 @@ defmodule CmsWeb.Endpoint do
     websocket: true,
     longpoll: false
 
-  socket "/admin-socket", CmsWeb.AdminSocket,
-    websocket: true,
-    longpoll: false
+  # socket "/admin-socket", CmsWeb.AdminSocket,
+  #   websocket: true,
+  #   longpoll: false
 
   # Serve at "/" the static files from "priv/static" directory.
   #
