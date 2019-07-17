@@ -17,6 +17,6 @@ defmodule Cms.Content.Post do
   def changeset(post, attrs) do
     post
     |> cast(attrs, [:title, :body, :published, :cover, :user_id, :slug])
-    |> validate_required([:title, :body, :published, :cover, :user_id, :slug])
+    |> validate_required([:title, :body, :published, :user_id, :slug])
   end
 end
