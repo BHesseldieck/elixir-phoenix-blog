@@ -24,10 +24,10 @@ defmodule CmsWeb.Router do
 
     get "/redirect_test", PageController, :redirect_test, as: :redirect_test # as is required otherwise it uses controller for path helper e.g. page_path
 
-    resources "/users", UserController do
-      resources "/posts", PostController
+    resources "/users", UserController
+    resources "/posts", PostController do
+      resources "/comments", CommentController
     end
-    resources "/comments", CommentController
     resources "/reviews", ReviewController, except: [:delete]
 
     forward "/jobs", BackgroundJob.Plug, name: "Hello Phoenix"
