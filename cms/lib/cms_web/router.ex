@@ -14,6 +14,10 @@ defmodule CmsWeb.Router do
     plug :accepts, ["json"]
   end
 
+  pipeline :auth do
+    plug CmsWeb.Plugs.Auth
+  end
+
   scope "/", CmsWeb do
     pipe_through :browser
 
@@ -35,8 +39,14 @@ defmodule CmsWeb.Router do
     forward "/jobs", BackgroundJob.Plug, name: "Hello Phoenix"
   end
 
+  scope "/content", CmsWeb.Content, as: :content do
+    pipe_through [:browser, :auth]
+
+    resources "/pages", PageController
+  end
+
   scope "/admin", CmsWeb.Admin, as: :admin do
-    pipe_through :browser
+    pipe_through [:browser, :auth]
 
     resources "/users",   CmsWeb.Admin.UserController
     resources "/images",  CmsWeb.Admin.ImageController
