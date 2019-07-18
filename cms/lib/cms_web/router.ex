@@ -24,6 +24,8 @@ defmodule CmsWeb.Router do
 
     get "/redirect_test", PageController, :redirect_test, as: :redirect_test # as is required otherwise it uses controller for path helper e.g. page_path
 
+    resources "/login", SessionController, only: [:new, :create, :delete], singleton: true
+
     resources "/users", UserController
     resources "/posts", PostController do
       resources "/comments", CommentController

@@ -6,7 +6,7 @@ defmodule Cms.Accounts do
   import Ecto.Query, warn: false
   alias Cms.Repo
 
-  alias Hello.Accounts.{User, Credential}
+  alias Cms.Accounts.{User, Credential}
 
   @doc """
   Returns the list of users.
@@ -200,5 +200,17 @@ defmodule Cms.Accounts do
   """
   def change_credential(%Credential{} = credential) do
     Credential.changeset(credential, %{})
+  end
+
+  def authenticate_by_email_password(email, _password) do
+    query =
+      from u in User,
+        inner_join: c in assoc(u, :credential),
+        where: c.email == ^email
+
+    case Repo.one(query) do
+      %User{} = user -> {:ok, user}
+      nil -> {:error, :unauthorized}
+    end
   end
 end
